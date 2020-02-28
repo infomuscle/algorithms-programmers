@@ -3,7 +3,7 @@ import queue, random, time
 def solution(food_times, k):
     foodsQ = queue.Queue()
     for i in range(len(food_times)):
-        foodsQ.put([i+1, food_times[i]])
+        foodsQ.put({i+1: food_times[i]})
 
     remainEatCnt = k
     orderedFood = [0] + sorted(food_times)
@@ -26,12 +26,13 @@ def solution(food_times, k):
     if foodsQ.qsize() == 0:
         return -1
     else:
-        return foodsQ.get()[0]
+        return list(foodsQ.get().keys())[0]
 
 def queueSubtractor(queue,  amount):
     food = queue.get()
-    food[1] -= amount
-    if food[1] == 0:
+    key = list(food.keys())[0]
+    food[key] -= amount
+    if food[key] == 0:
         pass
     else:
         queue.put(food)
