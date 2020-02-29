@@ -1,61 +1,77 @@
-import queue, random, time
+from queue import PriorityQueue
+from queue import Queue
+import random, time
+
 
 def solution(food_times, k):
-    foodsQ = queue.Queue()
+
+    totalFoodAmt = 0
+
+    pFoodsQ = PriorityQueue()
     for i in range(len(food_times)):
-        foodsQ.put({i+1: food_times[i]})
+        pFoodsQ.put((food_times[i], i+1))
+        totalFoodAmt += food_times[i]
+
+    if k >= totalFoodAmt:
+        return -1
 
     remainEatCnt = k
-    orderedFood = [0] + sorted(food_times)
-    for i in range(len(orderedFood)-1):
-        minFoodCnt = orderedFood[i+1] - orderedFood[i]
-        subAmount = minFoodCnt * foodsQ.qsize()
-        if remainEatCnt - subAmount > 0:
-            remainEatCnt -= subAmount
-            for j in range(foodsQ.qsize()):
-                foodsQ = queueSubtractor(foodsQ, minFoodCnt)
+    eatenAmt = 0
+    while pFoodsQ.qsize():
+        food = pFoodsQ.get()
+        # print(food)
+        subAmt = (pFoodsQ.qsize()+1) * (food[0]-eatenAmt)
+        # print(remainEatCnt)
+        if remainEatCnt - subAmt > 0:
+            remainEatCnt -= subAmt
+            eatenAmt += food[0] - eatenAmt
         else:
+            if pFoodsQ.qsize():
+                pFoodsQ.put(food)
             break
+
+    foodList = []
+    while pFoodsQ.qsize():
+        food = pFoodsQ.get()
+        foodList.append([food[1], food[0]-eatenAmt])
+    foodList = sorted(foodList)
+    # print(remainEatCnt)
+
+    nFoodsQ = Queue()
+    for i in range(len(foodList)):
+        nFoodsQ.put(foodList[i])
+        # print(foodList[i])
 
     for i in range(remainEatCnt):
-        if foodsQ.qsize():
-            foodsQ = queueSubtractor(foodsQ, 1)
+        if nFoodsQ.qsize():
+            food = nFoodsQ.get()
+            food[1] -= 1
+            if food[1] > 0:
+                nFoodsQ.put(food)
+            else:
+                continue
         else:
-            break
+            return -1
 
-    if foodsQ.qsize() == 0:
-        return -1
+    if nFoodsQ.qsize():
+        answer = nFoodsQ.get()[0]
     else:
-        return list(foodsQ.get().keys())[0]
+        answer = -1
 
-def queueSubtractor(queue,  amount):
-    food = queue.get()
-    key = list(food.keys())[0]
-    food[key] -= amount
-    if food[key] == 0:
-        pass
-    else:
-        queue.put(food)
-    return queue
+    return answer
 
-
-totalFoods = 0
-k = random.randrange(1000000, 1500000)
-food_times = []
-for i in range(2000):
-    foodCnt = random.randrange(500, 1000)
-    food_times.append(foodCnt)
-    totalFoods += foodCnt
-
-start = time.time()
-print(solution(food_times, k))
-print("time = ", time.time() - start)
-print("k = ", k)
-print("totalFoods = ", totalFoods)
-print("length of food_times = ", len(food_times))
-print("food_times = ", food_times)
-
-print(solution([3,1,2], 5))
-print(solution([3,1,2], 6))
-print(solution([3,1,2], 7))
-print(solution([3,1,2,2], 5))
+print(solution([5,4,3,2,1], 1))
+print(solution([5,4,3,2,1], 2))
+print(solution([5,4,3,2,1], 3))
+print(solution([5,4,3,2,1], 4))
+print(solution([5,4,3,2,1], 5))
+print(solution([5,4,3,2,1], 6))
+print(solution([5,4,3,2,1], 7))
+print(solution([5,4,3,2,1], 8))
+print(solution([5,4,3,2,1], 9))
+print(solution([5,4,3,2,1], 10))
+print(solution([5,4,3,2,1], 11))
+print(solution([5,4,3,2,1], 12))
+print(solution([5,4,3,2,1], 13))
+print(solution([5,4,3,2,1], 14))
+print(solution([5,4,3,2,1], 15))
