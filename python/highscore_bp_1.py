@@ -1,52 +1,29 @@
 def solution(answers):
     answer = []
     max = 0
+    pattern = [
+        [1, 2, 3, 4, 5],
+        [2, 1, 2, 3, 2, 4, 2, 5],
+        [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
+    ]
 
     for i in range(3):
-        if i == 0:
-            count = 0
-            for j in range(len(answers)):
-                if answers[j] == j%5 + 1:
-                     count += 1
+        count = 0
+        idx = 0
+        for j in range(len(answers)):
+            if answers[j] == pattern[i][idx]:
+                count += 1
+            idx += 1
+            if idx == len(pattern[i]):
+                idx = 0
+        if len(answer) == 0 or count == max:
             max = count
             answer.append(i+1)
-        elif i == 1:
-            count = 0
-            a = [1,3,4,5]
-            idx = 0
-            for j in range(len(answers)):
-                if j%2 == 0:
-                    if answers[j] == 2:
-                        count += 1
-                else:
-                    if answers[j] == a[idx]:
-                        count += 1
-                    idx += 1
-                    if idx > 3:
-                        idx = 0
-            if count > max:
-                max = count
-                answer.pop()
-                answer.append(i+1)
-            elif count == max:
-                answer.append(i+1)
-        else:
-            count = 0
-            a = [3,1,2,4,5]
-            idx = 0
-            for j in range(len(answers)):
-                if answers[j] == a[idx]:
-                    count += 1
-                if j%2 == 1:
-                    idx += 1
-                    if idx > 4:
-                        idx = 0
-            if count > max:
-                max = count
-                answer.pop()
-                answer.append(i+1)
-            elif count == max:
-                answer.append(i + 1)
+        elif count > max:
+            max = count
+            answer.pop()
+            answer.append(i + 1)
+
     return answer
 
 
