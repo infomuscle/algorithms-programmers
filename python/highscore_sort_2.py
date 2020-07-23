@@ -3,8 +3,8 @@ def solution(numbers):
     numbers = list(map(str, numbers))
     numbers = reversed(quick_sort(numbers))
 
-    answer = ''.join(numbers)
-    return answer
+    answer = int(''.join(numbers))
+    return str(answer)
 
 
 def quick_sort(numbers):
@@ -25,7 +25,7 @@ def quick_sort(numbers):
 n1 = [6, 10, 2]
 n2 = [3, 30, 34, 5, 9]
 n3 = [0, 0, 0, 1, 0, 3, 0]
-n4 = [9]
+n4 = [0,0]
 
 print(solution(n1))
 print(solution(n2))
