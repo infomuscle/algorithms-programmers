@@ -8,28 +8,27 @@ def solution(answers):
     ]
 
     for i in range(3):
-        count = 0
+        score = 0
         idx = 0
         for j in range(len(answers)):
             if answers[j] == pattern[i][idx]:
-                count += 1
+                score += 1
             idx += 1
             if idx == len(pattern[i]):
                 idx = 0
-        if len(answer) == 0 or count == max:
-            max = count
-            answer.append(i+1)
-        elif count > max:
-            max = count
+        if len(answer) == 0 or score == max:
+            max = score
+            answer.append(i + 1)
+        elif score > max:
+            max = score
             answer.pop()
             answer.append(i + 1)
 
     return answer
 
 
-tc1 = [1,2,3,4,5]
-tc2 = [1,3,2,4,2]
+tc1 = [1, 2, 3, 4, 5]
+tc2 = [1, 3, 2, 4, 2]
 
 print(solution(tc1))
 print(solution(tc2))
-
