@@ -19,13 +19,13 @@ def quick_sort(numbers):
         else:
             forward.append(numbers[i])
 
-    return forward + [pivot] + backward
+    return quick_sort(forward) + [pivot] + quick_sort(backward)
 
 
 n1 = [6, 10, 2]
 n2 = [3, 30, 34, 5, 9]
 n3 = [0, 0, 0, 1, 0, 3, 0]
-n4 = [1]
+n4 = [9]
 
 print(solution(n1))
 print(solution(n2))
