@@ -10,15 +10,10 @@ def quick_sort(strings, n):
     pivot = strings[0]
     forward, backward = [], []
     for i in range(1, len(strings)):
-        if ord(strings[i][n]) < ord(pivot[n]):
+        if ord(strings[i][n]) < ord(pivot[n]) or (ord(strings[i][n]) == ord(pivot[n]) and strings[i] < pivot):
             forward.append(strings[i])
-        elif ord(strings[i][n]) > ord(pivot[n]):
-            backward.append(strings[i])
         else:
-            if strings[i] < pivot:
-                forward.append(strings[i])
-            else:
-                backward.append(strings[i])
+            backward.append(strings[i])
 
     return quick_sort(forward, n) + [pivot] + quick_sort(backward, n)
 
