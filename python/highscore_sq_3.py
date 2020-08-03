@@ -11,9 +11,7 @@ def solution(prices):
         isDown = False
         num = que.popleft()
         stk.append(num)
-
         # print(answer, stk, que)
-
         time = 0
         for j in range(len(que)):
             time += 1
