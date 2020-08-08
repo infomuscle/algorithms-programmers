@@ -5,24 +5,22 @@ def solution(prices):
     answer = []
 
     stk = []
-    que = deque(prices)
 
     for i in range(len(prices)):
-        isDown = False
-        num = que.popleft()
-        stk.append(num)
-        # print(answer, stk, que)
-        time = 0
-        for j in range(len(que)):
-            time += 1
-            next = que.popleft()
-            if num > next and isDown == False:
-                isDown = True
-                answer.append(time)
-            que.append(next)
+        stk.append(prices[i])
+        que = deque(prices[i + 1:])
+        num = prices[i]
 
-        if isDown == False:
-            answer.append(time)
+        # print(stk, que)
+
+        for j in range(len(que)):
+            if que.popleft() < num:
+                stk.pop()
+                answer.append(j + 1)
+                break
+        if len(stk) != 0:
+            stk.pop()
+            answer.append(len(prices) - 1 - i)
 
     return answer
 
