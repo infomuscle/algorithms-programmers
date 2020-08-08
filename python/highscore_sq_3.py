@@ -7,9 +7,9 @@ def solution(prices):
     stk = []
 
     for i in range(len(prices)):
-        stk.append(prices[i])
-        que = deque(prices[i + 1:])
         num = prices[i]
+        stk.append(num)
+        que = deque(prices[i + 1:])
 
         # print(stk, que)
 
