@@ -1,26 +1,22 @@
-from collections import deque
-
-
 def solution(prices):
-    answer = []
+    answer = [0] * len(prices)
 
     stk = []
 
-    for i in range(len(prices)):
-        num = prices[i]
-        stk.append(num)
-        que = deque(prices[i + 1:])
+    for i, price in enumerate(prices):
+        if len(stk) != 0 and price < stk[-1][1]:
+            while len(stk) != 0:
+                top = stk.pop()
+                if top[1] > price:
+                    answer[top[0]] = i - top[0]
+                else:
+                    stk.append(top)
+                    break
+        stk.append((i, price))
 
-        # print(stk, que)
-
-        for j in range(len(que)):
-            if que.popleft() < num:
-                stk.pop()
-                answer.append(j + 1)
-                break
-        if len(stk) != 0:
-            stk.pop()
-            answer.append(len(prices) - 1 - i)
+    for i in range(len(stk)):
+        top = stk.pop()
+        answer[top[0]] = len(prices) - 1 - top[0]
 
     return answer
 
