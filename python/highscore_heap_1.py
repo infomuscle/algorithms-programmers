@@ -1,25 +1,24 @@
-from queue import PriorityQueue
+import heapq
 
 
 def solution(scoville, K):
     answer = 0
 
-    pq = PriorityQueue()
-    for s in scoville:
-        pq.put(s)
+    pq = scoville
+    heapq.heapify(pq)
 
-    while pq.qsize() > 1:
+    while len(pq) > 1:
         answer += 1
-        mix = pq.get() + pq.get() * 2
-        pq.put(mix)
+        mix = heapq.heappop(pq) + heapq.heappop(pq) * 2
+        heapq.heappush(pq, mix)
 
-        least = pq.get()
+        least = heapq.heappop(pq)
         if least > K:
             break
         else:
-            pq.put(least)
+            heapq.heappush(pq, least)
 
-    if pq.qsize() == 1 and pq.get() < K:
+    if len(pq) == 1 and heapq.heappop(pq) < K:
         answer = -1
 
     return answer
