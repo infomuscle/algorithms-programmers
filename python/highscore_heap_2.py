@@ -1,35 +1,30 @@
-from queue import PriorityQueue
+import heapq
 from queue import Queue
 
 
 def solution(jobs):
-    answer = 0
-    proc_times = []
-
+    # 정렬 필수
     jobs = sorted(jobs, key=lambda x: x[0])
+
+    proc_times = []
     processor = Queue()
-    requests = PriorityQueue()
-    time = 0
-    idx = 0
+    requests = []
+    time, idx = 0, 0
     while True:
-        # print(time)
         if jobs[idx][0] == time:
-            requests.put((jobs[idx][1], jobs[idx]))
+            heapq.heappush(requests, (jobs[idx][1], jobs[idx]))
             if idx < len(jobs) - 1:
                 idx += 1
 
         if processor.qsize() != 0:
             job = processor.get()
-            # print(job)
             if time - job[0] == job[1][1]:
-                # proc_times.append([job[0], time])
-                # proc_times.append([job[1][0], time])
                 proc_times.append(time - job[1][0])
             else:
                 processor.put(job)
 
-        if processor.qsize() == 0 and requests.qsize() != 0:
-            request = requests.get()
+        if processor.qsize() == 0 and len(requests) != 0:
+            request = heapq.heappop(requests)
             processor.put([time, request[1]])
 
         if idx == len(jobs) - 1 and processor.qsize() == 0:
@@ -37,7 +32,6 @@ def solution(jobs):
 
         time += 1
 
-    # print(proc_times)
     answer = int(sum(proc_times) / len(proc_times))
     return answer
 
