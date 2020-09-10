@@ -1,14 +1,49 @@
-import time
+from collections import deque
 
-testList = [[1, 9], [2, 8], [3, 7], [4, 6], [5, 5], [6, 4], [7, 3], [8, 2], [9, 1]]
-testDict = [{1:9}, {2:8}, {3:7}, {4:6}, {5:5}, {6:4}, {7:3}, {8:2}, {9:1}]
+graph = {
+    'A': {'B'},
+    'B': {'A', 'C', 'H'},
+    'C': {'B', 'D'},
+    'D': {'C', 'E', 'G'},
+    'E': {'D', 'F'},
+    'F': {'E'},
+    'G': {'D'},
+    'H': {'B', 'I', 'J', 'M'},
+    'I': {'H'},
+    'J': {'H', 'K'},
+    'K': {'J', 'L'},
+    'L': {'K'},
+    'M': {'H'}
+}
 
 
+def bfs(graph, start_node):
+    visited = list()
+    queue = deque()
+    queue.append(start_node)
 
-start = time.time()
-print(testList[0][1])
-print("time = ", time.time() - start)
+    while queue:
+        node = queue.popleft()
+        print(node)
+        if node not in visited:
+            visited.append(node)
+            queue.extend(graph[node] - set(visited))
 
-start = time.time()
-print(testDict[0][1])
-print("time = ", time.time() - start)
+    return visited
+
+
+def dfs(graph, start_node):
+    visited = list()
+    stack = list()
+    stack.append(start_node)
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.append(node)
+            stack.extend(graph[node] - set(visited))
+
+    return visited
+
+
+print(bfs(graph, 'A'))
