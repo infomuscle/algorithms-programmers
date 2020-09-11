@@ -1,31 +1,35 @@
+from collections import deque
+
+
 def solution(numbers, target):
     answer = 0
 
-    mes = [[]]
+    mes = deque()
+    mes.append([])
 
     for i in range(len(numbers)):
         tmps = []
-        for m in mes:
-            tmp1 = m + [numbers[i]]
-            tmp2 = m + [-numbers[i]]
-            if tmp1 not in mes:
-                tmps.append(tmp1)
-            if tmp2 not in mes:
-                tmps.append(tmp2)
-        mes = tmps
+        while len(mes) != 0:
+            tmp = mes.popleft()
+            tmp_plus = tmp + [numbers[i]]
+            tmp_minus = tmp + [-numbers[i]]
+            tmps.extend([tmp_plus, tmp_minus])
 
-    for m in mes:
-        if sum(m) == target:
+        for t in tmps:
+            mes.append(t)
+
+    while len(mes) != 0:
+        e = mes.popleft()
+        if sum(e) == target:
             answer += 1
-
-    # print(mes)
-    # print(len(mes))
 
     return answer
 
 
 n1 = [1, 1, 1, 1, 1]
 n2 = [1, 2, 3, 4, 5]
+n3 = [1] * 20
 
 print(solution(n1, 3))
 print(solution(n2, 3))
+print(solution(n3, 4))
