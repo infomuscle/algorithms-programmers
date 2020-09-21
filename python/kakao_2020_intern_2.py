@@ -1,4 +1,3 @@
-import heapq
 from itertools import permutations
 
 
@@ -12,28 +11,45 @@ def solution(expression):
         priorities[i] = list(p)
     print(priorities)
 
-    nums, ops = dict(), dict()
-    ptr, idx = 0, 0
+    expression_split = list()
+    ptr = 0
     for i, e in enumerate(expression):
         if e in operators:
-            nums[idx] = expression[ptr:i]
-            ops[idx] = expression[i]
-            idx += 1
+            expression_split.append(expression[ptr:i])
+            expression_split.append(expression[i])
             ptr = i + 1
-    nums[idx] = expression[ptr:]
-    print(nums, ops)
+    expression_split.append(expression[ptr:])
+    print(expression_split)
+    print("-----------")
 
     for priority in priorities.values():
-        ops_heap = list()
-        for op in ops.keys():
-            # print(ops[op], priority.index(ops[op]))
-            heapq.heappush(ops_heap, (priority.index(ops[op]), op))
-        print(ops_heap)
+        postfix = []
+        stack = []
+        for e in expression_split:
+            if e not in operators:
+                postfix.append(e)
+            else:
+                while len(stack) != 0 and priority.index(stack[-1]) < priority.index(e):
+                    postfix.append(stack.pop())
+                stack.append(e)
+        postfix.extend(stack)
+        print(priority, postfix)
+
+        stk = []
+        for p in postfix:
+            if p not in operators:
+                stk.append(p)
+            else:
+                stk.append(calculator(p, int(stk.pop()), int(stk.pop())))
+
+        reward = stk.pop()
+        if abs(reward) > answer:
+            answer = abs(reward)
 
     return answer
 
 
-def calculator(op, num1, num2):
+def calculator(op: str, num1: int, num2: int):
     if op == "+":
         result = num1 + num2
     elif op == "-":
@@ -48,4 +64,5 @@ e1 = "100-200*300-500+20"
 e2 = "50*6-3*2"
 
 print(solution(e1))
+print("###########")
 print(solution(e2))
