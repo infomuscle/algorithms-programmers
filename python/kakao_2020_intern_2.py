@@ -67,5 +67,4 @@ e1 = "100-200*300-500+20"
 e2 = "50*6-3*2"
 
 print(solution(e1))
-# print("###########")
 print(solution(e2))
