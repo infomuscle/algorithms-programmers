@@ -9,9 +9,8 @@ def solution(gems):
 
     possibles = []
     while True:
-        gems_tmp = set(gems[pl:pr + 1])
-        if gems_set == gems_tmp:
-            possibles.append((pl + 1, pr + 1))
+        if gems_set == set(gems[pl:pr + 1]):
+            possibles.append([pl + 1, pr + 1])
             max_length = pr - pl + 1 - 1
             if (min_length + max_length) // 2 == current_length:
                 break
@@ -29,8 +28,7 @@ def solution(gems):
                     current_length = (min_length + max_length) // 2
                 pl, pr = 0, current_length - 1
 
-    # print("possibles: ", possibles)
-    answer = list(possibles[-1])
+    answer = possibles[-1]
     return answer
 
 
