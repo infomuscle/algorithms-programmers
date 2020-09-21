@@ -1,26 +1,20 @@
 def solution(gems):
-    answer = []
-
     gems_set = set(gems)
 
     pl, pr = 0, len(gems_set) - 1
 
     step = 0
     while True:
-        gems_tmp = gems[pl:pr + 1]
-        if gems_set == set(gems_tmp):
+        if gems_set == set(gems[pl:pr + 1]):
             break
         else:
             pl += 1
             pr += 1
             if pr == len(gems):
                 step += 1
-                pl = 0
-                pr = len(gems_set) - 1 + step
+                pl, pr = 0, len(gems_set) - 1 + step
 
-    answer.append(pl + 1)
-    answer.append(pr + 1)
-
+    answer = [pl + 1, pr + 1]
     return answer
 
 
