@@ -3,25 +3,23 @@ def solution(gems):
 
     gems_set = set(gems)
 
-    p1, p2 = 0, 0
+    pl, pr = 0, len(gems_set) - 1
 
+    step = 0
     while True:
-        gems_tmp = gems[:p1 + 1]
+        gems_tmp = gems[pl:pr + 1]
         if gems_set == set(gems_tmp):
             break
         else:
-            p1 += 1
+            pl += 1
+            pr += 1
+            if pr == len(gems):
+                step += 1
+                pl = 0
+                pr = len(gems_set) - 1 + step
 
-    while True:
-        gems_tmp = gems[p2:p1 + 1]
-        if gems_set != set(gems_tmp):
-            p2 -= 1
-            break
-        else:
-            p2 += 1
-
-    answer.append(p2 + 1)
-    answer.append(p1 + 1)
+    answer.append(pl + 1)
+    answer.append(pr + 1)
 
     return answer
 
