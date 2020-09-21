@@ -1,40 +1,27 @@
 def solution(gems):
     answer = []
 
-    gems_map = dict()
-    for g in gems:
-        if g not in gems_map.keys():
-            gems_map[g] = 0
-        gems_map[g] += 1
+    gems_set = set(gems)
 
-    pl, pr = 0, len(gems) - 1
+    p1, p2 = 0, 0
 
     while True:
-        is_there_all_gem = True
-        for g in gems_map.keys():
-            if gems[pl:pr + 1].count(g) == 0:
-                is_there_all_gem = False
-                break
-        if is_there_all_gem == True:
-            pr -= 1
-        else:
-            pr += 1
+        gems_tmp = gems[:p1 + 1]
+        if gems_set == set(gems_tmp):
             break
+        else:
+            p1 += 1
 
     while True:
-        is_there_all_gem = True
-        for g in gems_map.keys():
-            if gems[pl:pr + 1].count(g) == 0:
-                is_there_all_gem = False
-                break
-        if is_there_all_gem == True:
-            pl += 1
-        else:
-            pl -= 1
+        gems_tmp = gems[p2:p1 + 1]
+        if gems_set != set(gems_tmp):
+            p2 -= 1
             break
+        else:
+            p2 += 1
 
-    answer.append(pl + 1)
-    answer.append(pr + 1)
+    answer.append(p2 + 1)
+    answer.append(p1 + 1)
 
     return answer
 
