@@ -1,34 +1,38 @@
 def solution(gems):
     gems_set = set(gems)
+    answers = []
 
-    min_length = len(gems_set)
-    max_length = len(gems)
+    p1, p2 = 0, 0
+    while p1 <= len(gems):
+        # print(p1, p2)
+        while gems_set != set(gems[p2:p1 + 1]) and p1 != len(gems):
+            p1 += 1
+        right = p1
 
-    current_length = (min_length + max_length) // 2
-    pl, pr = 0, current_length - 1
-
-    possibles = []
-    while True:
-        if gems_set == set(gems[pl:pr + 1]):
-            possibles.append([pl + 1, pr + 1])
-            max_length = pr - pl + 1 - 1
-            if (min_length + max_length) // 2 == current_length:
+        lefts = []
+        while True:
+            if gems_set == set(gems[p2:right + 1]):
+                lefts.append(p2)
+            if p2 == right:
+                if len(lefts) != 0:
+                    p2 = p1
+                    p1 = lefts[-1]
                 break
-            else:
-                current_length = (min_length + max_length) // 2
-            pl, pr = 0, current_length - 1
-        else:
-            pl += 1
-            pr += 1
-            if pr == len(gems):
-                min_length = pr - pl + 1 + 1
-                if (min_length + max_length) // 2 == current_length:
-                    break
-                else:
-                    current_length = (min_length + max_length) // 2
-                pl, pr = 0, current_length - 1
+            p2 += 1
 
-    answer = possibles[-1]
+        if len(lefts) != 0:
+            answers.append([lefts[-1] + 1, right + 1])
+        if p1 == p2:
+            p1 += 1
+            p2 += 1
+
+    min_range = min(a[1] - a[0] for a in answers)
+    min_answers = []
+    for a in answers:
+        if a[1] - a[0] == min_range:
+            min_answers.append(a)
+    answer = min_answers[0]
+
     return answer
 
 
