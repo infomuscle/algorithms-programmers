@@ -1,20 +1,24 @@
-from itertools import combinations
-
-
 def solution(number, k):
-    max = 0
-    idxs = list(i for i in range(len(number)))
-    combs = combinations(idxs, k)
-    for c in combs:
-        tmp = ""
-        for i, n in enumerate(number):
-            if i not in c:
-                tmp += n
-        if int(tmp) > max:
-            max = int(tmp)
+    max_num = number[:len(number) - k]
 
-    answer = str(max)
+    for i in range(len(number) - k, len(number)):
+        tmp = max_num + number[i]
+        tmp_max = find_max(tmp)
+        if tmp_max > int(max_num):
+            max_num = str(tmp_max)
+
+    answer = max_num
     return answer
+
+
+def find_max(number):
+    max_num = 0
+    for i in range(len(number)):
+        tmp = int(number[0:i] + number[i + 1:])
+        if tmp > max_num:
+            max_num = tmp
+
+    return max_num
 
 
 n1 = "1924"
