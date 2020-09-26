@@ -7,8 +7,7 @@ def solution(number, k):
         if tmp_max > int(max_num):
             max_num = str(tmp_max)
 
-    answer = max_num
-    return answer
+    return max_num
 
 
 def find_max(number):
