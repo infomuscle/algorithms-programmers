@@ -1,20 +1,17 @@
 def solution(n, lost, reserve):
-    answer = 0
+    set_reserve = set(reserve) - set(lost)
+    set_lost = set(lost) - set(reserve)
 
-    reserve_tmp = []
-    for r in reserve:
-        if r not in lost:
-            reserve_tmp.append(r)
-    reserve = reserve_tmp
+    borrow = 0
+    for l in set_lost:
+        if l - 1 in set_reserve:
+            set_reserve.remove(l - 1)
+            borrow += 1
+        elif l + 1 in set_reserve:
+            set_reserve.remove(l + 1)
+            borrow += 1
 
-
-    can_borrow = 0
-    for l in lost:
-        if l + 1 in reserve or l - 1 in reserve:
-            can_borrow += 1
-    # 앞에를 가져가야 하나 뒤에를 가져가야 하나
-
-    answer = n - len(lost) + can_borrow
+    answer = n - len(set_lost) + borrow
 
     return answer
 
@@ -28,7 +25,19 @@ r2 = [3]
 n3 = 3
 l3 = [3]
 r3 = [1]
+n4 = 5
+l4 = [2, 4]
+r4 = [1, 3]
+n5 = 5
+l5 = [2, 4]
+r5 = [3, 5]
+n6 = 5
+l6 = [2, 4]
+r6 = [2, 4]
 
 print(solution(n1, l1, r1))
 print(solution(n2, l2, r2))
 print(solution(n3, l3, r3))
+print(solution(n4, l4, r4))
+print(solution(n5, l5, r5))
+print(solution(n6, l6, r6))
