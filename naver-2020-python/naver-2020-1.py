@@ -2,7 +2,7 @@ from collections import deque
 
 
 def solution(m, k):
-    answer = ''
+    answer = ""
     key_queue = deque(k)
 
     k_index = []
