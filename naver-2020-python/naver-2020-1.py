@@ -2,6 +2,7 @@ from collections import deque
 
 
 def solution(m, k):
+    answer = ''
     key_queue = deque(k)
 
     k_index = []
@@ -18,8 +19,9 @@ def solution(m, k):
     for i, m_chr in enumerate(m):
         if i not in k_index:
             encrypted += m_chr
+    answer = encrypted
 
-    return encrypted
+    return answer
 
 
 m1 = "kkaxbycyz"
