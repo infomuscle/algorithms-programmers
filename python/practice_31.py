@@ -1,20 +1,12 @@
 def solution(n):
-    answer = 0
+    seive = [False, False] + [True] * (n - 1)
 
-    primes = [2]
+    for i in range(2, n + 1):
+        if seive[i]:
+            for j in range(i * 2, n + 1, i):
+                seive[j] = False
 
-    for i in range(3, n + 1, 2):
-        is_prime = True
-        for p in primes:
-            if i % p == 0:
-                is_prime = False
-                break
-        if is_prime:
-            primes.append(i)
-
-    answer = len(primes)
-
-    return answer
+    return seive.count(True)
 
 
 n1 = 10
