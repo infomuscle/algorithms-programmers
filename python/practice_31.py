@@ -3,7 +3,7 @@ def solution(n):
 
     primes = [2]
 
-    for i in range(2, n + 1):
+    for i in range(3, n + 1, 2):
         is_prime = True
         for p in primes:
             if i % p == 0:
