@@ -13,25 +13,44 @@ def solution(name):
         if current == name:
             break
 
-        if current[idx + 1] != name[idx + 1]:
-            idx += 1
-            answer += 1
-        else:
-            idx -= 1
-            answer += 1
+        r_idx, l_idx = idx, idx
+        r_distance, l_distance = 0, 0
+        while True:
+            r_idx += 1
+            r_idx = idx_reorganaizer(r_idx, name)
+            r_distance += 1
+            if current[r_idx] != name[r_idx]:
+                break
+        while True:
+            l_idx -= 1
+            l_idx = idx_reorganaizer(l_idx, name)
+            l_distance += 1
+            if current[l_idx] != name[l_idx]:
+                break
 
-        if idx < 0:
-            idx = len(name) + idx
-        elif idx >= len(name):
-            idx = 0
+        if r_distance <= l_distance:
+            idx = r_idx
+            answer += r_distance
+        else:
+            idx = l_idx
+            answer += l_distance
 
     return answer
+
+
+def idx_reorganaizer(idx, name):
+    if idx < 0:
+        idx = len(name) + idx
+    elif idx >= len(name):
+        idx = 0
+
+    return idx
 
 
 n1 = "JEROEN"
 n2 = "JAN"
 n3 = "ADFECBFAERFADFAS"
 
-# print(solution(n1))
-# print(solution(n2))
+print(solution(n1))
+print(solution(n2))
 print(solution(n3))
