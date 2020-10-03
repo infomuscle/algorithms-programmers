@@ -50,7 +50,11 @@ def idx_reorganaizer(idx, name):
 n1 = "JEROEN"
 n2 = "JAN"
 n3 = "ADFECBFAERFADFAS"
+n4 = "BBBAAAB"
+n5 = "ABABAAAAABA"
 
 print(solution(n1))
 print(solution(n2))
 print(solution(n3))
+print(solution(n4))
+print(solution(n5))
