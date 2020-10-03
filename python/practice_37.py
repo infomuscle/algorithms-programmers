@@ -1,9 +1,7 @@
 def solution(arr):
     arr = sorted(arr)
 
-    num = arr[-1]
-    adder = arr[-1]
-
+    num, adder = arr[-1], arr[-1]
     while True:
         is_lcm = True
         for a in arr:
@@ -12,8 +10,7 @@ def solution(arr):
                 break
         if is_lcm:
             break
-        else:
-            num += adder
+        num += adder
 
     return num
 
