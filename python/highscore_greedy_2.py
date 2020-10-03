@@ -1,23 +1,15 @@
 def solution(number, k):
-    max_num = number[:len(number) - k]
+    num = number
 
-    for i in range(len(number) - k, len(number)):
-        tmp = max_num + number[i]
-        tmp_max = find_max(tmp)
-        if tmp_max > int(max_num):
-            max_num = str(tmp_max)
+    for i in range(k):
+        max = num[1:]
+        for j in range(len(num)):
+            tmp = num[:j] + num[j + 1:]
+            if tmp >= max:
+                max = tmp
+        num = max
 
-    return max_num
-
-
-def find_max(number):
-    max_num = 0
-    for i in range(len(number)):
-        tmp = int(number[0:i] + number[i + 1:])
-        if tmp > max_num:
-            max_num = tmp
-
-    return max_num
+    return num
 
 
 n1 = "1924"
