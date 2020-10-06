@@ -39,7 +39,7 @@ ct5 = ["Jeju", "Pangyo", "NewYork", "newyork"]
 cs6 = 0
 ct6 = ["Jeju", "Pangyo", "Seoul", "NewYork", "LA"]
 cs7 = 1
-ct7 = ["Jeju", "Jeju", "Jeju", "Pangyo", "Jeju"]
+ct7 = ["Jeju", "Jeju", "Pangyo", "Pangyo", "Jeju"]
 
 print(solution(cs1, ct1))
 print(solution(cs2, ct2))
