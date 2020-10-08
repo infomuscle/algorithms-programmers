@@ -1,6 +1,6 @@
 from collections import deque
 
-
+# heapq도 써봤는데 더 느리다
 def solution(people, limit):
     answer = 0
 
