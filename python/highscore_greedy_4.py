@@ -1,22 +1,20 @@
-from collections import deque
-
-# heapq도 써봤는데 더 느리다
 def solution(people, limit):
     answer = 0
 
-    lefts = deque(enumerate(sorted(people, reverse=True)))
-    while len(lefts) != 0:
-        unboated = deque()
-        weight_on_boat = 0
-        for i in range(len(lefts)):
-            p = lefts.popleft()
-            if weight_on_boat + p[1] <= limit:
-                weight_on_boat += p[1]
-            else:
-                unboated.append(p)
+    people.sort()
 
-        lefts = unboated
+    left, right = 0, len(people) - 1
+
+    while left <= right:
+        weight_on_boat = 0
+        weight_on_boat += people[right]
+
+        while weight_on_boat + people[left] <= limit:
+            weight_on_boat += people[left]
+            left += 1
+
         answer += 1
+        right -= 1
 
     return answer
 
