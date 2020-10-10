@@ -1,21 +1,15 @@
 def solution(number, k):
     target_length = len(number) - k
     stack = []
-
     for i in range(len(number)):
-        # print(stack)
         if len(stack) + len(number) - i == target_length:
             stack.append(number[i])
         else:
             while len(stack) != 0 and stack[-1] < number[i] and len(stack) + len(number) - i != target_length:
-                # if len(stack) != 0 and stack[-1] < number[i]:
                 stack.pop()
             stack.append(number[i])
-    # print(stack)
 
-    answer = ""
-    for i in range(target_length):
-        answer += stack[i]
+    answer = "".join(stack)[:len(number) - k]
 
     return answer
 
