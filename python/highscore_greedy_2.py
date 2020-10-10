@@ -2,12 +2,10 @@ def solution(number, k):
     target_length = len(number) - k
     stack = []
     for i in range(len(number)):
-        if len(stack) + len(number) - i == target_length:
-            stack.append(number[i])
-        else:
+        if len(stack) + len(number) - i != target_length:
             while len(stack) != 0 and stack[-1] < number[i] and len(stack) + len(number) - i != target_length:
                 stack.pop()
-            stack.append(number[i])
+        stack.append(number[i])
 
     answer = "".join(stack)[:len(number) - k]
 
