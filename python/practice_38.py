@@ -1,27 +1,19 @@
 def solution(n):
     answer = ""
 
-    map1 = {1: "A", 2: "B", 0: "C"}
-    map2 = {"A": 1, "B": 2, "C": 3}
-    map3 = {1: "A", 2: "B", 3: "C"}
-
-    chrs = ""
-    remains = n % 3
-    chr = str(map1[remains])
-    chrs += chr
-    n -= map2[chr]
-
     square = 1
-    while True:
-        if n == 0:
-            break
-        for i in range(3, 0, -1):
-            if n == ((3 ** square) * i):
-                chrs += map3[i]
-                n -= (3 ** square) * i
-                break
-        square += 1
-    answer = chrs[::-1]
+    while n > 0:
+        if n % 3 == 1:
+            answer += "1"
+            n -= 1 * (3 ** square)
+        elif n % 3 == 2:
+            answer += "2"
+            n -= 2 * (3 ** square)
+        elif n % 3 == 0:
+            answer += "4"
+            n -= 3 * (3 ** square)
+
+    answer = answer[::-1]
     return answer
 
 
@@ -43,16 +35,16 @@ n12 = 12  # CC 3^1*C + 3^0*C
 
 n13 = 13  # AAA 3^2*A + 3^1*A + 3^0*A
 
-# print(solution(n1))
-# print(solution(n2))
-# print(solution(n3))
-# print(solution(n4))
-# print(solution(n5))
-# print(solution(n6))
+print(solution(n1))
+print(solution(n2))
+print(solution(n3))
+print(solution(n4))
+print(solution(n5))
+print(solution(n6))
 # print(solution(n7))
 # print(solution(n8))
 # print(solution(n9))
 # print(solution(n10))
 # print(solution(n11))
 # print(solution(n12))
-print(solution(n13))
+# print(solution(n13))
