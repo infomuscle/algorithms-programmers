@@ -1,17 +1,19 @@
 def solution(n):
     answer = ""
 
-    square = 1
+    square = 0
     while n > 0:
-        if n % 3 == 1:
+        squared = 3 ** square
+        if n % squared == 1:
             answer += "1"
-            n -= 1 * (3 ** square)
-        elif n % 3 == 2:
+            n -= 1 * squared
+        elif n % squared == 2:
             answer += "2"
-            n -= 2 * (3 ** square)
-        elif n % 3 == 0:
+            n -= 2 * squared
+        elif n % squared == 0:
             answer += "4"
-            n -= 3 * (3 ** square)
+            n -= 3 * squared
+        square += 1
 
     answer = answer[::-1]
     return answer
@@ -35,12 +37,12 @@ n12 = 12  # CC 3^1*C + 3^0*C
 
 n13 = 13  # AAA 3^2*A + 3^1*A + 3^0*A
 
-print(solution(n1))
-print(solution(n2))
-print(solution(n3))
-print(solution(n4))
+# print(solution(n1))
+# print(solution(n2))
+# print(solution(n3))
+# print(solution(n4))
 print(solution(n5))
-print(solution(n6))
+# print(solution(n6))
 # print(solution(n7))
 # print(solution(n8))
 # print(solution(n9))
