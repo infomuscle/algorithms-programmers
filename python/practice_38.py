@@ -1,30 +1,20 @@
 def solution(n):
     answer = ""
 
-    if n % 3 == 1:
-        answer += "1"
-        n -= 1
-    elif n % 3 == 2:
-        answer += "2"
-        n -= 2
-    elif n % 3 == 0:
-        answer += "4"
-        n -= 3
-
     square = 1
     while n > 0:
-        print(n)
-        # print(answer)
-        squared = 3 ** square
-        if n // squared == 1:
+        divider = 3 ** square
+        remain = n % divider
+        d = 3 ** (square - 1)
+        # print(n, divider, remain)
+        if remain // d == 1:
             answer += "1"
-            n -= 1 * squared
-        elif n // squared == 2:
+        elif remain // d == 2:
             answer += "2"
-            n -= 2 * squared
-        elif n // squared == 3:
+        elif remain // d == 0:
             answer += "4"
-            n -= 3 * squared
+            remain = (3 ** (square - 1)) * 3
+        n -= remain
         square += 1
 
     answer = answer[::-1]
@@ -60,10 +50,8 @@ n13 = 13  # AAA 3^2*A + 3^1*A + 3^0*A
 # print(solution(n9))
 # print(solution(n10))
 # print(solution(n11))
-print(solution(n12))
-print(solution(n13))
+# print(solution(n12))
+# print(solution(n13))
 
-
-# for i in range(100):
-#     print(i+1, solution(i+1))
-
+for i in range(100):
+    print(i + 1, solution(i + 1))
