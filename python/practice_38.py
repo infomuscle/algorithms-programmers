@@ -1,16 +1,28 @@
 def solution(n):
     answer = ""
 
-    square = 0
+    if n % 3 == 1:
+        answer += "1"
+        n -= 1
+    elif n % 3 == 2:
+        answer += "2"
+        n -= 2
+    elif n % 3 == 0:
+        answer += "4"
+        n -= 3
+
+    square = 1
     while n > 0:
+        print(n)
+        # print(answer)
         squared = 3 ** square
-        if n % squared == 1:
+        if n // squared == 1:
             answer += "1"
             n -= 1 * squared
-        elif n % squared == 2:
+        elif n // squared == 2:
             answer += "2"
             n -= 2 * squared
-        elif n % squared == 0:
+        elif n // squared == 3:
             answer += "4"
             n -= 3 * squared
         square += 1
@@ -41,12 +53,17 @@ n13 = 13  # AAA 3^2*A + 3^1*A + 3^0*A
 # print(solution(n2))
 # print(solution(n3))
 # print(solution(n4))
-print(solution(n5))
+# print(solution(n5))
 # print(solution(n6))
 # print(solution(n7))
 # print(solution(n8))
 # print(solution(n9))
 # print(solution(n10))
 # print(solution(n11))
-# print(solution(n12))
-# print(solution(n13))
+print(solution(n12))
+print(solution(n13))
+
+
+# for i in range(100):
+#     print(i+1, solution(i+1))
+
