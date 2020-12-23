@@ -1,20 +1,23 @@
+from collections import deque
+
+
 def solution(begin, target, words):
+    if target not in words:
+        return 0
+
     words.append(begin)
     convertible = find_convertible(words)
 
     visited = []
-    stack = [begin]
-    cnt = 0
-    # cnts = []
-    while stack:
-        node = stack.pop()
-        if node == target:
-            return cnt
-            # cnts.append(cnt)
-            # cnt = 0
-        visited.append(node)
-        stack.extend(convertible[node] - set(visited))
-        cnt += 1
+    queue = deque([(begin, 0)])
+    while queue:
+        node = queue.popleft()
+        if node[0] == target:
+            return node[1]
+        visited.append(node[0])
+        for n in convertible[node[0]]:
+            if n not in visited:
+                queue.append((n, node[1] + 1))
 
     return 0
 
@@ -40,6 +43,7 @@ def is_convertible(word1, word2):
 
     if same_cnt == len(word1) - 1:
         return True
+
     return False
 
 
