@@ -15,9 +15,9 @@ def solution(begin, target, words):
         if node[0] == target:
             return node[1]
         visited.append(node[0])
-        for n in convertible[node[0]]:
-            if n not in visited:
-                queue.append((n, node[1] + 1))
+        for next in convertible[node[0]]:
+            if next not in visited:
+                queue.append((next, node[1] + 1))
 
     return 0
 
