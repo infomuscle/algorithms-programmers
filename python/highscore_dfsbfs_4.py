@@ -36,6 +36,7 @@ t4 = [["ICN", "SFO"], ["ICN", "ATL"], ["SFO", "JFK"], ["JFK", "ICN"]]  # ICN - S
 t5 = [["ICN", "HND"], ["ICN", "SFO"], ["ICN", "JFK"], ["JFK", "ICN"], ["HND", "ICN"]]  # ICN - HND - ICN - JFK - ICN - SFO
 t6 = [["ICN", "JFK"], ["JFK", "ATL"], ["JFK", "IAD"], ["IAD", "HND"], ["HND", "JFK"]]  # ICN - JFK - IAD - HND - JFK - ATL
 t7 = [["ICN", "JFK"], ["JFK", "ICN"], ["ICN", "JFK"], ["JFK", "ICN"]]  # ICN - JFK - ICN - JFK - ICN
+t8 = [["ICN", "HND"], ["ICN", "IAD"], ["IAD", "JFK"], ["JFK", "IAD"], ["HND", "JFK"], ["JFK", "HND"], ["HND", "ICN"], ["IAD", "HND"]] # ICN - HND - JFK - HND - ICN - IAD - HND - JFK - IAD
 
 print(solution(t1))
 print(solution(t2))
@@ -44,3 +45,4 @@ print(solution(t4))
 print(solution(t5))
 print(solution(t6))
 print(solution(t7))
+print(solution(t8))
