@@ -8,15 +8,16 @@ def solution(tickets):
         ticket_map[ticket[0]].add(tuple(ticket))
 
     used_tickets = []
-    stack = [sorted(list(ticket_map["ICN"]))[0]]
+    stack = sorted(list(ticket_map["ICN"]), reverse=True)
     while stack:
         node = stack.pop()
         if node not in used_tickets:
-            used_tickets.append(node)
             if node[1] in ticket_map:
+                used_tickets.append(node)
                 stack.extend(sorted(list(ticket_map[node[1]] - set(used_tickets)), reverse=True))
-        if len(used_tickets) == len(tickets):
-            break
+            elif len(used_tickets) == len(tickets) - 1:
+                used_tickets.append(node)
+                break
 
     answer.append("ICN")
     for used_ticket in used_tickets:
@@ -27,6 +28,10 @@ def solution(tickets):
 
 t1 = [["ICN", "JFK"], ["HND", "IAD"], ["JFK", "HND"]]
 t2 = [["ICN", "SFO"], ["ICN", "ATL"], ["SFO", "ATL"], ["ATL", "ICN"], ["ATL", "SFO"]]
+t3 = [["ICN", "SFO"], ["SFO", "ATL"], ["SFO", "JFK"], ["JFK", "SFO"]]  # ICN - SFO - JFK - SFO - ATL
+t4 = [["ICN", "SFO"], ["ICN", "ATL"], ["SFO", "JFK"], ["JFK", "ICN"]]  # ICN - SFO - JFK - ICN - ATL
 
-print(solution(t1))
-print(solution(t2))
+# print(solution(t1))
+# print(solution(t2))
+# print(solution(t3))
+print(solution(t4))
