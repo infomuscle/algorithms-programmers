@@ -13,9 +13,10 @@ def solution(tickets):
         node = stack.pop()
         if node not in used_tickets:
             used_tickets.append(node)
-            if len(used_tickets) == len(tickets):
-                break
-            stack.extend(sorted(list(ticket_map[node[1]] - set(used_tickets)), reverse=True))
+            if node[1] in ticket_map:
+                stack.extend(sorted(list(ticket_map[node[1]] - set(used_tickets)), reverse=True))
+        if len(used_tickets) == len(tickets):
+            break
 
     answer.append("ICN")
     for used_ticket in used_tickets:
