@@ -7,10 +7,10 @@ def solution(numbers):
         nums_to_check += list(map(''.join, permutations(list(numbers), i)))
 
     prime_numbers = []
-    for n in nums_to_check:
-        if check_prime_number(n) == True:
-            if int(n) not in prime_numbers:
-                prime_numbers.append(int(n))
+    for num in nums_to_check:
+        if check_prime_number(num) == True:
+            if int(num) not in prime_numbers:
+                prime_numbers.append(int(num))
 
     return len(prime_numbers)
 
