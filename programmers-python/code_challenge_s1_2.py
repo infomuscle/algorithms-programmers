@@ -5,7 +5,6 @@ def solution(n):
         tmp.append(-1)
         snail.append(tmp)
     snail.append([-1] * (n + 1))
-    # print(snail)
 
     cells = n * (n + 1) // 2
     i, j, num = 0, 0, 0
@@ -14,7 +13,6 @@ def solution(n):
         num += 1
         snail[i][j] = num
         way = check_way(snail, i, j, way)
-        # print(num, way, snail)
         if way == "down":
             i += 1
         elif way == "right":
@@ -23,7 +21,6 @@ def solution(n):
             i -= 1
             j -= 1
 
-    # print(snail)
     answer = []
     for floor in snail:
         for cell in floor:
