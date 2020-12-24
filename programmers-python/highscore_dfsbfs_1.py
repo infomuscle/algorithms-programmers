@@ -4,9 +4,7 @@ from collections import deque
 def solution(numbers, target):
     answer = 0
 
-    mes = deque()
-    mes.append([])
-
+    mes = deque([[]])
     for i in range(len(numbers)):
         tmps = []
         while len(mes) != 0:
