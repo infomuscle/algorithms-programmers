@@ -18,20 +18,26 @@ def solution(words, queries):
     for query in queries:
         cnt = 0
         full_length = len(query)
+
         comp_in_length = word_map.get(full_length, None)
         if comp_in_length == None:
             answer.append(cnt)
             continue
 
-        split = query.split("?")
+        q = query.replace("?", "")
+        if q == "":
+            for key in comp_in_length["first"]:
+                cnt += len(comp_in_length["first"][key])
+            answer.append(cnt)
+            continue
+
         if query[-1] == "?":
             comparatives = comp_in_length["first"].get(query[0], None)
-            q = split[0]
         else:
             comparatives = comp_in_length["last"].get(query[-1], None)
-            q = split[-1]
         if comparatives == None:
             answer.append(cnt)
+            continue
 
         for comparative in comparatives:
             if query[-1] == "?":
@@ -48,15 +54,8 @@ def solution(words, queries):
 w1 = ["frodo", "front", "frost", "frozen", "frame", "kakao"]
 q1 = ["fro??", "????o", "fr???", "fro???", "pro?"]
 
+w2 = ["t", "o"]
+q2 = ["?"]
+
 print(solution(w1, q1))
-# query_map = {}
-# for i, query in enumerate(queries):
-#     tmp = {}
-#     tmp["string"] = query
-#     tmp["full_length"] = len(query)
-#     tmp["wc_length"] = query.count("?")
-#     if query[0] == "?":
-#         tmp["type"] = "prefix"
-#     else:
-#         tmp["type"] = "suffix"
-#     query_map[i] = tmp
+print(solution(w2, q2))
