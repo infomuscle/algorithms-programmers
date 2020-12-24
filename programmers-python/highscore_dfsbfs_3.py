@@ -23,7 +23,7 @@ def solution(begin, target, words):
 
 
 def find_convertible(words):
-    convertible = dict()
+    convertible = {}
 
     for word in words:
         tmp = []
