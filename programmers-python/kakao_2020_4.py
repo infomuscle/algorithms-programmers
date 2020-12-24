@@ -3,25 +3,41 @@ def solution(words, queries):
 
     word_map = {}
     for word in words:
-        if len(word) not in word_map:
-            word_map[len(word)] = []
-        word_map[len(word)].append(word)
+        word_length = len(word)
+        if word_length not in word_map:
+            word_map[word_length] = {}
+            word_map[word_length]["first"] = {}
+            word_map[word_length]["last"] = {}
+        if word[0] not in word_map[word_length]["first"]:
+            word_map[word_length]["first"][word[0]] = []
+        word_map[word_length]["first"][word[0]].append(word)
+        if word[-1] not in word_map[word_length]["last"]:
+            word_map[word_length]["last"][word[-1]] = []
+        word_map[word_length]["last"][word[-1]].append(word)
 
     for query in queries:
         cnt = 0
         full_length = len(query)
-        comparatives = word_map.get(full_length, None)
-        if comparatives == None:
+        comp_in_length = word_map.get(full_length, None)
+        if comp_in_length == None:
             answer.append(cnt)
             continue
+
         split = query.split("?")
+        if query[-1] == "?":
+            comparatives = comp_in_length["first"].get(query[0], None)
+            q = split[0]
+        else:
+            comparatives = comp_in_length["last"].get(query[-1], None)
+            q = split[-1]
+        if comparatives == None:
+            answer.append(cnt)
+
         for comparative in comparatives:
             if query[-1] == "?":
-                q = split[0]
                 if q == comparative[:len(q)]:
                     cnt += 1
             else:
-                q = split[-1]
                 if q == comparative[full_length - len(q):]:
                     cnt += 1
         answer.append(cnt)
