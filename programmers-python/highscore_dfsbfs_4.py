@@ -1,5 +1,5 @@
 def solution(tickets):
-    ticket_map = dict()
+    ticket_map = {}
     for departure, arrival in tickets:
         if departure not in ticket_map:
             ticket_map[departure] = []
@@ -29,11 +29,11 @@ t6 = [["ICN", "JFK"], ["JFK", "ATL"], ["JFK", "IAD"], ["IAD", "HND"], ["HND", "J
 t7 = [["ICN", "JFK"], ["JFK", "ICN"], ["ICN", "JFK"], ["JFK", "ICN"]]  # ICN - JFK - ICN - JFK - ICN
 t8 = [["ICN", "HND"], ["ICN", "IAD"], ["IAD", "JFK"], ["JFK", "IAD"], ["HND", "JFK"], ["JFK", "HND"], ["HND", "ICN"], ["IAD", "HND"]]  # ICN - HND - JFK - HND - ICN - IAD - HND - JFK - IAD
 
-# print(solution(t1))
-# print(solution(t2))
-# print(solution(t3))
-# print(solution(t4))
-# print(solution(t5))
-# print(solution(t6))
-# print(solution(t7))
+print(solution(t1))
+print(solution(t2))
+print(solution(t3))
+print(solution(t4))
+print(solution(t5))
+print(solution(t6))
+print(solution(t7))
 print(solution(t8))
