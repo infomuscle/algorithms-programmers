@@ -5,9 +5,8 @@ def solution(numbers):
             if i == j:
                 continue
             answer_set.add(numbers[i] + numbers[j])
-    answer = sorted(list(answer_set))
 
-    return answer
+    return sorted(list(answer_set))
 
 
 n1 = [2, 1, 3, 4, 1]
