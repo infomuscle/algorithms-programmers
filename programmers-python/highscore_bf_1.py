@@ -8,8 +8,7 @@ def solution(answers):
     ]
 
     for i in range(3):
-        score = 0
-        idx = 0
+        score, idx = 0, 0
         for j in range(len(answers)):
             if answers[j] == pattern[i][idx]:
                 score += 1
