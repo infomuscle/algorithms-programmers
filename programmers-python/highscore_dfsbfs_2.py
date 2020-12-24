@@ -1,7 +1,7 @@
 def solution(n, computers):
     networks = {}
     for i, computer in enumerate(computers):
-        connected = list()
+        connected = []
         for j, c in enumerate(computer):
             if c == 1:
                 connected.append(j)
