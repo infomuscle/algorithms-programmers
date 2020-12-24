@@ -15,7 +15,12 @@ def solution(words, queries):
             word_map[word_length]["last"][word[-1]] = []
         word_map[word_length]["last"][word[-1]].append(word)
 
+    found = {}
     for query in queries:
+        if query in found:
+            answer.append(found[query])
+            continue
+
         cnt = 0
         full_length = len(query)
 
@@ -41,12 +46,14 @@ def solution(words, queries):
 
         for comparative in comparatives:
             if query[-1] == "?":
-                if q == comparative[:len(q)]:
-                    cnt += 1
+                match = comparative[:len(q)]
             else:
-                if q == comparative[full_length - len(q):]:
-                    cnt += 1
+                match = comparative[full_length - len(q):]
+            if q == match:
+                cnt += 1
+
         answer.append(cnt)
+        found[query] = cnt
 
     return answer
 
