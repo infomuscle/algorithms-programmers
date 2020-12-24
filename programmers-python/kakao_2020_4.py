@@ -9,20 +9,21 @@ def solution(words, queries):
 
     for query in queries:
         cnt = 0
-        comparatives = word_map.get(len(query), None)
+        full_length = len(query)
+        comparatives = word_map.get(full_length, None)
         if comparatives == None:
             answer.append(cnt)
             continue
+        split = query.split("?")
         for comparative in comparatives:
             if query[-1] == "?":
-                q = query.split("?")[0]
+                q = split[0]
                 if q == comparative[:len(q)]:
                     cnt += 1
             else:
-                q = query.split("?")[-1]
-                if q == comparative[len(query) - len(q):]:
+                q = split[-1]
+                if q == comparative[full_length - len(q):]:
                     cnt += 1
-
         answer.append(cnt)
 
     return answer
