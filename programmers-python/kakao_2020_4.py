@@ -1,34 +1,25 @@
 def solution(words, queries):
     answer = []
 
-    trie = {}
-    trie_rev = {}
+    trie, trie_rev = {}, {}
+    tries = [trie, trie_rev]
     for word in words:
         word_length = len(word)
 
-        if word_length not in trie:
-            trie[word_length] = [0, {}]
-        trie[word_length][0] += 1
+        for i, t in enumerate(tries):
+            if i == 1:
+                word = word[::-1]
 
-        node = trie[word_length][1]
-        for w in word:
-            if w not in node:
-                node[w] = [0, {}]
-            node[w][0] += 1
-            node = node[w][1]
+            if word_length not in t:
+                t[word_length] = [0, {}]
+            t[word_length][0] += 1
 
-        word = word[::-1]
-
-        if word_length not in trie_rev:
-            trie_rev[word_length] = [0, {}]
-        trie_rev[word_length][0] += 1
-
-        node = trie_rev[word_length][1]
-        for w in word:
-            if w not in node:
-                node[w] = [0, {}]
-            node[w][0] += 1
-            node = node[w][1]
+            node = t[word_length][1]
+            for w in word:
+                if w not in node:
+                    node[w] = [0, {}]
+                node[w][0] += 1
+                node = node[w][1]
 
     for query in queries:
         query_length = len(query)
