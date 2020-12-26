@@ -2,7 +2,6 @@ def solution(A, B):
     answer = 0
 
     A, B = sorted(A), sorted(B)
-
     for i in range(len(A)):
         answer += A[i] * B[len(B) - 1 - i]
 
