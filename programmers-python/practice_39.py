@@ -1,6 +1,5 @@
 def solution(n):
-    answer = fibonacci(n) % 1234567
-    return answer
+    return fibonacci(n) % 1234567
 
 
 def fibonacci(n):
