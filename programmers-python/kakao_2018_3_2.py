@@ -14,7 +14,6 @@ def solution(msg):
         if c == "":
             answer.append(dictionary[w])
             break
-
         if w in dictionary and w + c not in dictionary:
             answer.append(dictionary[w])
             dictionary[w + c] = v
