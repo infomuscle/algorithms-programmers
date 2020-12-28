@@ -2,32 +2,23 @@ import re
 
 
 def solution(str1, str2):
-    jaccard = 65536
-
-    l1, l2 = [], []
-    for i in range(len(str1) - 1):
-        s1 = str1[i:i + 2].upper()
-        if re.match(r'^[a-zA-Z]*$', s1):
-            l1.append(s1)
-    for i in range(len(str2) - 1):
-        s2 = str2[i:i + 2].upper()
-        if re.match(r'^[a-zA-Z]*$', s2):
-            l2.append(s2)
+    regex = re.compile(r'^[a-zA-Z]*$')
+    l1 = [str1[i:i + 2].upper() for i in range(len(str1) - 1) if re.match(regex, str1[i:i + 2].upper())]
+    l2 = [str2[i:i + 2].upper() for i in range(len(str2) - 1) if re.match(regex, str2[i:i + 2].upper())]
 
     if len(l1) == 0 and len(l2) == 0:
-        jaccard *= 1
+        jaccard = 1
     else:
-        jaccard *= (len(get_intersection(l1, l2)) / len(get_union(l1, l2)))
+        jaccard = len(get_intersection(l1, l2)) / len(get_union(l1, l2))
 
-    return int(jaccard)
+    return int(jaccard * 65536)
 
 
 def get_intersection(list1, list2):
     intersection = []
 
     for l in set(list1):
-        tmp = [l] * min(list1.count(l), list2.count(l))
-        intersection.extend(tmp)
+        intersection.extend([l] * min(list1.count(l), list2.count(l)))
 
     return intersection
 
@@ -36,8 +27,7 @@ def get_union(list1, list2):
     union = []
 
     for l in set(list1 + list2):
-        tmp = [l] * max(list1.count(l), list2.count(l))
-        union.extend(tmp)
+        union.extend([l] * max(list1.count(l), list2.count(l)))
 
     return union
 
