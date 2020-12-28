@@ -18,8 +18,7 @@ def solution(relation):
             if key in key_map:
                 is_key_repeat = True
                 break
-            else:
-                key_map[key] = True
+            key_map[key] = True
         if is_key_repeat:
             continue
 
