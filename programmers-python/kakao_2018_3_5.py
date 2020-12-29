@@ -1,22 +1,21 @@
 def solution(m, musicinfos):
     melody = convert_chords(m)
-    # print("melody:", melody)
 
     musics = []
     for i, musicinfo_str in enumerate(musicinfos):
         music_info = musicinfo_str.split(",")
-        play_time = get_play_time(music_info[0], music_info[1])
-        sheet = convert_chords(music_info[3])
-        played_chords = sheet * (play_time // len(sheet) + 1)
-        played_chords = played_chords[:play_time]
-        # print("played_chords:", played_chords)
 
-        for j in range(len(played_chords)):
+        play_time = get_play_time(music_info[0], music_info[1])
+        if len(melody) > play_time:
+            continue
+
+        sheet = convert_chords(music_info[3])
+        played_chords = (sheet * (play_time // len(sheet) + 1))[:play_time]
+
+        for j in range(len(played_chords) - len(melody) + 1):
             if played_chords[j:j + len(melody)] == melody:
-                # print(played_chords[j:j + len(melody)])
                 musics.append((music_info[2], play_time, i))
                 break
-    # print("musics:", musics)
 
     if len(musics) == 0:
         return "(None)"
@@ -65,10 +64,13 @@ m2 = "CC#BCC#BCC#BCC#B"
 mi2 = ["03:00,03:30,FOO,CC#B", "04:00,04:08,BAR,CC#BCC#BCC#B"]
 m3 = "ABC"
 mi3 = ["12:00,12:14,HELLO,C#DEFGAB", "13:00,13:05,WORLD,ABCDEF"]
+m4 = "A"
+mi4 = []
 
 print(solution(m1, mi1))
 print(solution(m2, mi2))
 print(solution(m3, mi3))
+print(solution(m4, mi4))
 
 # chords = music_info[3] * (play_time // len(music_info[3]) + 1)
 # chords = chords[:play_time]
