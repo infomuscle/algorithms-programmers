@@ -19,7 +19,7 @@ def solution(m, musicinfos):
     # print("musics:", musics)
 
     if len(musics) == 0:
-        return None
+        return "(None)"
     if len(musics) == 1:
         return musics[0][0]
     musics = sorted(musics, key=lambda x: (-x[1], x[2]))
