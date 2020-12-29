@@ -30,9 +30,7 @@ def get_play_time(start_time, end_time):
     start_info = list(map(int, start_time.split(":")))
     end_info = list(map(int, end_time.split(":")))
 
-    play_time = (end_info[0] * 60 + end_info[1]) - (start_info[0] * 60 - start_info[1])
-
-    return play_time
+    return (end_info[0] * 60 + end_info[1]) - (start_info[0] * 60 - start_info[1])
 
 
 def convert_chords(chords: str):
@@ -42,18 +40,11 @@ def convert_chords(chords: str):
     for chord in chords:
         if chord == "#" or len(stack) == 0:
             stack.append(chord)
-            continue
         else:
-            tmp = ""
-            while len(stack) > 0:
-                tmp += stack.pop()
-            converted.append(tmp[::-1])
-            stack.append(chord)
+            converted.append("".join(stack))
+            stack = [chord]
     if len(stack) > 0:
-        tmp = ""
-        while len(stack) > 0:
-            tmp += stack.pop()
-        converted.append(tmp[::-1])
+        converted.append("".join(stack))
 
     return converted
 
