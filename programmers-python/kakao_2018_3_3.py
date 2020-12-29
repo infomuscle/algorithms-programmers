@@ -1,7 +1,7 @@
 def solution(msg):
     answer = []
 
-    dictionary = dict()
+    dictionary = {}
     for i in range(26):
         dictionary[chr(i + 65)] = i + 1
 
