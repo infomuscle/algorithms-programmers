@@ -1,16 +1,14 @@
-from itertools import combinations
-
-
 def solution(nums):
-    answer = 0
+    allowed = len(nums) // 2
 
-    combs = combinations(nums, len(nums) // 2)
-    for comb in combs:
-        diversity = len(set(comb))
-        if diversity > answer:
-            answer = diversity
+    mine = {}
+    for num in nums:
+        if num not in mine:
+            mine[num] = True
+        if len(mine) == allowed:
+            break
 
-    return answer
+    return len(mine)
 
 
 n1 = [3, 1, 2, 3]
