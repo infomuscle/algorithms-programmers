@@ -1,36 +1,28 @@
 def solution(n, a, b):
-    answer = 1
-
     tournament = [[i + 1, i + 2] for i in range(0, n, 2)]
 
-    while True:
-        match = False
-        for i in range(len(tournament)):
-            if a in tournament[i] and b in tournament[i]:
-                match = True
-                break
-        if match:
-            break
+    round = 1
+    while [a, b] not in tournament and [b, a] not in tournament:
         tmp = []
         for i in range(0, len(tournament), 2):
-            t = []
+            match = []
             if a in tournament[i]:
-                t.append(a)
+                match.append(a)
             elif b in tournament[i]:
-                t.append(b)
+                match.append(b)
             else:
-                t.append(tournament[i][0])
+                match.append(tournament[i][0])
             if a in tournament[i + 1]:
-                t.append(a)
+                match.append(a)
             elif b in tournament[i + 1]:
-                t.append(b)
+                match.append(b)
             else:
-                t.append(tournament[i + 1][0])
-            tmp.append(t)
+                match.append(tournament[i + 1][0])
+            tmp.append(match)
         tournament = tmp
-        answer += 1
+        round += 1
 
-    return answer
+    return round
 
 
 n1, a1, b1 = 8, 4, 7
