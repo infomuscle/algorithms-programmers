@@ -1,8 +1,7 @@
 def solution(board):
-    row_size = len(board)
-    col_size = len(board[0])
-
+    row_size, col_size = len(board), len(board[0])
     side_size = min(row_size, col_size)
+
     max_found = False
     while side_size > 0:
         for i in range(row_size - side_size + 1):
