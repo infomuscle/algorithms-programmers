@@ -3,8 +3,8 @@ def solution(board):
     col_size = len(board[0])
 
     side_size = min(row_size, col_size)
+    max_found = False
     while side_size > 0:
-        max_found = False
         for i in range(row_size - side_size + 1):
             for j in range(col_size - side_size + 1):
                 if check_square(board, i, j, side_size):
@@ -27,6 +27,8 @@ def check_square(board, x, y, n):
                 if board[x + i][y + j] == 0:
                     valid = False
                     break
+            if not valid:
+                break
     except:
         valid = False
 
