@@ -6,16 +6,12 @@ def solution(n, a, b):
         tmp = []
         for i in range(0, len(tournament), 2):
             match = []
-            if a in tournament[i]:
-                match.append(a)
-            elif b in tournament[i]:
-                match.append(b)
+            if a in tournament[i] or b in tournament[i]:
+                match.append(list(filter(lambda x: x == a or x == b, tournament[i]))[0])
             else:
                 match.append(tournament[i][0])
-            if a in tournament[i + 1]:
-                match.append(a)
-            elif b in tournament[i + 1]:
-                match.append(b)
+            if a in tournament[i + 1] or b in tournament[i + 1]:
+                match.append(list(filter(lambda x: x == a or x == b, tournament[i + 1]))[0])
             else:
                 match.append(tournament[i + 1][0])
             tmp.append(match)
