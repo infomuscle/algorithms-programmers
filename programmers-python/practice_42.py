@@ -1,40 +1,22 @@
 def solution(board):
     row_size, col_size = len(board), len(board[0])
-    side_size = min(row_size, col_size)
+    for i in range(1, row_size):
+        for j in range(1, col_size):
+            if board[i][j] > 0:
+                one, two, three = board[i - 1][j], board[i - 1][j - 1], board[i][j - 1]
+                if one > 0 and two > 0 and three > 0:
+                    board[i][j] = min(one, two, three) + 1
+    max_in_rows = [max(row) for row in board]
 
-    max_found = False
-    while side_size > 0:
-        for i in range(row_size - side_size + 1):
-            for j in range(col_size - side_size + 1):
-                if check_square(board, i, j, side_size):
-                    max_found = True
-                    break
-            if max_found:
-                break
-        if max_found:
-            break
-        side_size -= 1
-
-    return side_size ** 2
+    return max(max_in_rows) ** 2
 
 
-def check_square(board, x, y, n):
-    valid = True
-    try:
-        for i in range(n):
-            for j in range(n):
-                if board[x + i][y + j] == 0:
-                    valid = False
-                    break
-            if not valid:
-                break
-    except:
-        valid = False
-
-    return valid
-
-
-b1 = [[0, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [0, 0, 1, 0]]
+b1 = [
+    [0, 1, 1, 1],
+    [1, 1, 1, 1],
+    [1, 1, 1, 1],
+    [0, 0, 1, 0]
+]
 b2 = [[0, 0, 1, 1], [1, 1, 1, 1]]
 
 print(solution(b1))
