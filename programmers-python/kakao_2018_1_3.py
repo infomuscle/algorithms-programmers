@@ -2,28 +2,27 @@ import operator
 
 
 def solution(cacheSize, cities):
-    answer = 0
-
     cache = {}
 
     if cacheSize == 0:
         return len(cities) * 5
 
+    runtime = 0
     for i, city in enumerate(cities):
         city = city.lower()
         if city not in cache and len(cache) < cacheSize:
             cache[city] = i
-            answer += 5
+            runtime += 5
         elif city not in cache and len(cache) >= cacheSize:
             cache_sorted = sorted(cache.items(), key=operator.itemgetter(1))
             del cache[cache_sorted[0][0]]
             cache[city] = i
-            answer += 5
+            runtime += 5
         elif city in cache:
             cache[city] = i
-            answer += 1
+            runtime += 1
 
-    return answer
+    return runtime
 
 
 cs1 = 3
