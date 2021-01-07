@@ -1,23 +1,19 @@
 def solution(gems):
     diversity = len(set(gems))
-    left = 0
-    right = len(gems) - 1
+    left, right = 0, 0
 
-    while True:
-        if len(set(gems[left:right + 1])) == diversity:
-            right -= 1
-        else:
+    answer = [1, len(gems)]
+    while right < len(gems):
+        line = set(gems[left:right + 1])
+        if len(line) < diversity:
             right += 1
-            break
-
-    while True:
-        if len(set(gems[left:right + 1])) == diversity:
-            left += 1
         else:
-            left -= 1
-            break
+            tmp = [left + 1, right + 1]
+            if tmp[1] - tmp[0] < answer[1] - answer[0]:
+                answer = tmp
+            left += 1
 
-    return [left + 1, right + 1]
+    return answer
 
 
 g1 = ["DIA", "RUBY", "RUBY", "DIA", "DIA", "EMERALD", "SAPPHIRE", "DIA"]
@@ -30,4 +26,4 @@ print(solution(g1))
 print(solution(g2))
 print(solution(g3))
 print(solution(g4))
-print(solution(g5))
+# print(solution(g5))
