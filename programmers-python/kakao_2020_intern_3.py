@@ -2,15 +2,15 @@ def solution(gems):
     diversity = len(set(gems))
     left, right = 0, 0
 
-    answer = [1, len(gems)]
-    while right < len(gems):
-        line = set(gems[left:right + 1])
-        if len(line) < diversity:
+    total_line = len(gems)
+    answer = [1, total_line]
+    while right < total_line:
+        part_line = set(gems[left:right + 1])
+        if len(part_line) < diversity:
             right += 1
         else:
-            tmp = [left + 1, right + 1]
-            if tmp[1] - tmp[0] < answer[1] - answer[0]:
-                answer = tmp
+            if right - left < answer[1] - answer[0]:
+                answer = [left + 1, right + 1]
             left += 1
 
     return answer
@@ -26,4 +26,4 @@ print(solution(g1))
 print(solution(g2))
 print(solution(g3))
 print(solution(g4))
-# print(solution(g5))
+print(solution(g5))
