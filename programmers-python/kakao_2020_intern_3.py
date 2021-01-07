@@ -4,14 +4,25 @@ def solution(gems):
 
     total_line = len(gems)
     answer = [1, total_line]
-    while right < total_line:
-        part_line = set(gems[left:right + 1])
-        if len(part_line) < diversity:
+
+    basket = {gems[0]: 1}
+    while right < total_line and left < total_line:
+        if len(basket) < diversity and right < total_line - 1:
             right += 1
+            if gems[right] not in basket:
+                basket[gems[right]] = 0
+            basket[gems[right]] += 1
         else:
-            if right - left < answer[1] - answer[0]:
+            if len(basket) == diversity and right - left < answer[1] - answer[0]:
                 answer = [left + 1, right + 1]
-            left += 1
+
+            if left == right:
+                right += 1
+            else:
+                basket[gems[left]] -= 1
+                if basket[gems[left]] == 0:
+                    del basket[gems[left]]
+                left += 1
 
     return answer
 
