@@ -7,7 +7,6 @@ def solution(gems):
 
     basket = {gems[0]: 1}
     while right < total_line and left < total_line:
-        # print(left, right, basket)
         if len(basket) == diversity:
             if right - left < answer[1] - answer[0]:
                 answer = [left + 1, right + 1]
@@ -26,23 +25,6 @@ def solution(gems):
                 basket[gems[right]] += 1
             else:
                 left += 1
-
-        # if len(basket) < diversity and right < total_line - 1:
-        #     right += 1
-        #     if gems[right] not in basket:
-        #         basket[gems[right]] = 0
-        #     basket[gems[right]] += 1
-        # else:
-        #     if len(basket) == diversity and right - left < answer[1] - answer[0]:
-        #         answer = [left + 1, right + 1]
-        #
-        #     if left == right:
-        #         right += 1
-        #     else:
-        #         basket[gems[left]] -= 1
-        #         if basket[gems[left]] == 0:
-        #             del basket[gems[left]]
-        #         left += 1
 
     return answer
 
