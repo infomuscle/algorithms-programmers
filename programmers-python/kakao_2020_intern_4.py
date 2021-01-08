@@ -1,20 +1,17 @@
+from collections import deque
+
+
 def solution(board):
     n = len(board)
     graph = get_graph(board, n)
 
-    stack = ["00"]
-    while stack:
-        cur = stack[-1]
-        print(cur)
-        if cur in graph and len(graph[cur]) != 0:
-            if graph[cur][-1] not in stack:
-                stack.append(graph[cur].pop())
-            else:
-                graph[cur].pop()
-                stack.pop()
-        if stack[-1] == str(n - 1) + str(n - 1):
-            break
-    print(stack)
+    queue = deque(["00"])
+    visited = []
+    while queue:
+        cur = queue.popleft()
+        if cur not in visited:
+            visited.append(cur)
+            queue.extend(set(graph[cur]) - set(visited))
 
     answer = 0
     straight, corner = 0, 0
