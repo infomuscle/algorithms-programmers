@@ -6,7 +6,6 @@ def solution(n):
         divider = 3 ** square
         remain = n % divider
         d = 3 ** (square - 1)
-        # print(n, divider, remain)
         if remain // d == 1:
             answer += "1"
         elif remain // d == 2:
