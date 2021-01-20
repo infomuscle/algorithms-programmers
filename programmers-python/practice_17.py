@@ -5,7 +5,7 @@ def solution(s, n):
         if s[i] != " ":
             o = ord(s[i])
             e = o + n
-            if (o >= 65 and o <=90 and e > 90) or (o >= 97 and o<= 122 and e > 122):
+            if (o >= 65 and o <= 90 and e > 90) or (o >= 97 and o <= 122 and e > 122):
                 e -= 26
             answer += chr(e)
         else:
