@@ -1,10 +1,6 @@
 def solution(arr):
-    answer = 0
-
-    answer = sum(arr) / len(arr)
-
-    return answer
+    return sum(arr) / len(arr)
 
 
-print(solution([1,2,3,4]))
-print(solution([5,5]))
+print(solution([1, 2, 3, 4]))
+print(solution([5, 5]))
