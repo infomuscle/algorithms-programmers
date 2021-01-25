@@ -7,6 +7,9 @@ def solution(key, lock):
 
 
 def rotation(arr):
+    """
+    2차원 배열을 시계 방향으로 90도 회전
+    """
     length = len(arr)
     rot = []
     for i in range(length):
@@ -22,7 +25,7 @@ def rotation(arr):
 def check(arr):
     for row in arr:
         for col in row:
-            if col == 0:
+            if col != 1:
                 return False
 
     return True
