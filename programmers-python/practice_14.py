@@ -6,5 +6,6 @@ def solution(n):
 
     return answer
 
+
 print(solution(123))
 print(solution(987))
