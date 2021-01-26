@@ -10,6 +10,7 @@ def solution(s):
 
     return answer
 
+
 s1 = "a234"
 s2 = "1234"
 
