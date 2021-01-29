@@ -1,5 +1,4 @@
 def solution(n):
-    answer = 0
     answerStr = ""
     l = []
     for x in str(n):
@@ -12,7 +11,6 @@ def solution(n):
     answer = int(answerStr)
 
     return answer
-
 
 
 print(solution(118372))
