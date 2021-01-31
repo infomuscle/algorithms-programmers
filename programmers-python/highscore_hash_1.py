@@ -1,7 +1,6 @@
 def solution(participant, completion):
     answer = ''
-    mapC = {}
-    mapP = {}
+    mapC, mapP = {}, {}
 
     for c in completion:
         if c not in mapC:
