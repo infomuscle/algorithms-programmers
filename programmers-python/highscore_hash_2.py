@@ -5,16 +5,17 @@ def solution(phone_book):
 
     for pn in phone_book:
         for i in range(len(pn)):
-            if pn[0:i+1] not in map:
-               map[pn[0:i+1]] = pn
+            if pn[0:i + 1] not in map:
+                map[pn[0:i + 1]] = pn
             else:
-                if pn[0:i+1] == map[pn[0:i+1]]:
+                if pn[0:i + 1] == map[pn[0:i + 1]]:
                     answer = False
                     break
         if answer == False:
             break
 
     return answer
+
 
 tc1 = ["119", "97674223", "1195524421"]
 tc2 = ["123", "456", "789"]
